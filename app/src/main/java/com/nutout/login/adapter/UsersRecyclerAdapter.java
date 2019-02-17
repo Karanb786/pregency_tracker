@@ -1,5 +1,6 @@
 package com.nutout.login.adapter;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nutout.login.R;
+import com.nutout.login.addwomen;
 import com.nutout.login.modal.User;
+import com.nutout.login.modal.addwomenclass;
+import com.nutout.login.sql.DatabaseHelper;
 
 import java.util.List;
 
 public class UsersRecyclerAdapter  extends RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder> {
+
 
     private List<User> listUsers;
 
@@ -62,4 +67,3 @@ public class UsersRecyclerAdapter  extends RecyclerView.Adapter<UsersRecyclerAda
 
 
 }
-

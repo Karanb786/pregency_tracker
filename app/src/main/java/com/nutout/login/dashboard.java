@@ -2,7 +2,6 @@ package com.nutout.login;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,7 +19,7 @@ import android.widget.ImageView;
 import android.support.v4.view.GravityCompat;
 
 import com.nutout.login.adapter.UsersRecyclerAdapter;
-import com.nutout.login.modal.User;
+import com.nutout.login.modal.addwomenclass;
 import com.nutout.login.sql.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class dashboard extends AppCompatActivity  implements NavigationView.OnNa
     private AppCompatActivity activity = dashboard.this;
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
-    private List<User> listUsers;
+    private List<addwomenclass> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private DatabaseHelper databaseHelper;
     ImageView menu;
@@ -113,7 +112,7 @@ public class dashboard extends AppCompatActivity  implements NavigationView.OnNa
             @Override
             protected Void doInBackground(Void... params) {
                 listUsers.clear();
-                listUsers.addAll(databaseHelper.getAllUser());
+                listUsers.addAll(databaseHelper.getAllWomen());
 
                 return null;
             }
