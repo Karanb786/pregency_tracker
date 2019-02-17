@@ -8,10 +8,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".help"></activity>
+        <activity android:name=".setting" />
+        <activity android:name=".clinicalexamination" />
+        <activity android:name=".checkshedule" />
+        <activity android:name=".addwomen" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

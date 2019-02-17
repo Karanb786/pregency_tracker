@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:icon="@drawable/home_icon"
+        android:title="Home"/>
+
+    <item android:id="@+id/addwomen"
+        android:icon="@drawable/add_user"
+        android:title="Add women"/>
+
+    <item android:id="@+id/checkshedule"
+        android:icon="@drawable/shedule_icon"
+        android:title="Check Shedule"/>
+
+    <item android:id="@+id/Clinical_Examination"
+        android:icon="@drawable/clinical_examination"
+        android:title="Clinical Examination"/>
+
+    <item android:id="@+id/Setting"
+        android:icon="@drawable/setting_icon"
+        android:title="Setting"/>
+
+    <item android:id="@+id/help"
+        android:icon="@drawable/help_icon"
+        android:title="Help"/>
+
+    <item android:id="@+id/logout"
+        android:icon="@drawable/logout_icon"
+        android:title="Logout"/>
+
+</menu>
