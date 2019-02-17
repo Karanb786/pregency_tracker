@@ -19,9 +19,9 @@ import java.util.List;
 public class UsersRecyclerAdapter  extends RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder> {
 
 
-    private List<User> listUsers;
+    private List<addwomenclass> listUsers;
 
-    public UsersRecyclerAdapter(List<User> listUsers) {
+    public UsersRecyclerAdapter(List<addwomenclass> listUsers) {
         this.listUsers = listUsers;
     }
 
@@ -36,9 +36,9 @@ public class UsersRecyclerAdapter  extends RecyclerView.Adapter<UsersRecyclerAda
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        holder.textViewName.setText(listUsers.get(position).getName());
-        holder.textViewEmail.setText(listUsers.get(position).getEmail());
-        holder.textViewPassword.setText(listUsers.get(position).getPassword());
+        holder.textViewName.setText(listUsers.get(position).getFname());
+        holder.textViewEmail.setText(listUsers.get(position).getAge());
+        holder.textViewPassword.setText(listUsers.get(position).getAddress());
     }
 
     @Override

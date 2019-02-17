@@ -10,31 +10,38 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.nutout.login.helper.InputValidation;
 import com.nutout.login.modal.User;
 import com.nutout.login.modal.addwomenclass;
 import com.nutout.login.sql.DatabaseHelper;
+import com.nutout.login.sql.Databasehelper2;
 
 public class addwomen extends AppCompatActivity {
 
     private InputValidation inputValidation;
-    private DatabaseHelper databaseHelper;
+
+    Databasehelper2 databasehelper2;
     private addwomenclass women;
     private final AppCompatActivity activity = addwomen.this;
     EditText fname,mname,lname,dob,age,address;
     Spinner sp1,sp2,sp3;
     ArrayAdapter<CharSequence> adapter1,adapter2,adapter3;
     Button registerbtn;
+    addwomenclass addwomen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addwomen);
+        addwomen=new addwomenclass();
+
+        databasehelper2 = new Databasehelper2(this);
 
 
         initViews();
-        initObjects();
+       // initObjects();
 
 
     }
@@ -102,37 +109,45 @@ public class addwomen extends AppCompatActivity {
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postDataToSQLite();
+               addData();
+                //postDataToSQLite();
             }
         });
 
     }
 
-    private void postDataToSQLite() {
-        if(!databaseHelper.checkUser(fname.getText().toString().trim())){
-            women.setFname(fname.getText().toString().trim());
-            women.setMname(mname.getText().toString().trim());
-            women.setLname(lname.getText().toString().trim());
-            women.setDob(dob.getText().toString().trim());
-            women.setAge(age.getText().toString().trim());
-            women.setMstatus(sp1.getSelectedItem().toString().trim());
-            women.setBloodgrp(sp2.getSelectedItem().toString().trim());
-            women.setAddress(address.getText().toString().trim());
-            women.setState(sp3.getSelectedItem().toString().trim());
-            databaseHelper.addWomen(women);
-           Intent in = new Intent(addwomen.this,dashboard.class);
-           startActivity(in);
+    private void addData() {
+        String name = fname.getText().toString().trim();
+        String midname = mname.getText().toString().trim();
+        String lastname = lname.getText().toString().trim();
+        String date = dob.getText().toString().trim();
+        String agewomen= age.getText().toString().trim();
+        String add= address.getText().toString().trim();
+        String marid= sp1.getSelectedItem().toString().trim();
+        String bgrp = sp2.getSelectedItem().toString().trim();
+        String statewomen = sp3.getSelectedItem().toString().trim();
+    addwomen.setFname(name);
+    addwomen.setMname(midname);
+    addwomen.setLname(lastname);
+    addwomen.setDob(date);
+    addwomen.setAge(agewomen);
+    addwomen.setAddress(add);
+    addwomen.setMstatus(marid);
+    addwomen.setBloodgrp(bgrp);
+    addwomen.setState(statewomen);
+    databasehelper2.addWomen(addwomen);
 
+       /* boolean insertdata = (boolean) databasehelper2.addWomen(name,midname,lastname,date,agewomen,marid,bgrp,add,statewomen);
+        if (addwomen==true){
+            Toast.makeText(addwomen.this,"Women added successfully",Toast.LENGTH_SHORT).show();
+            Intent in = new Intent(addwomen.this,dashboard.class);
+            startActivity(in);
+        }else{
+            Toast.makeText(addwomen.this,"Something wrong",Toast.LENGTH_SHORT).show();
 
+        }*/
 
-        }
     }
 
 
-    private void initObjects() {
-        inputValidation = new InputValidation(activity);
-        databaseHelper = new DatabaseHelper(activity);
-        women = new addwomenclass();
-
-    }
 }

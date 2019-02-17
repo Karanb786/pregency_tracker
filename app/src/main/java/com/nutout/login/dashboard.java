@@ -1,5 +1,6 @@
 package com.nutout.login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
@@ -19,8 +20,10 @@ import android.widget.ImageView;
 import android.support.v4.view.GravityCompat;
 
 import com.nutout.login.adapter.UsersRecyclerAdapter;
+import com.nutout.login.modal.User;
 import com.nutout.login.modal.addwomenclass;
 import com.nutout.login.sql.DatabaseHelper;
+import com.nutout.login.sql.Databasehelper2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class dashboard extends AppCompatActivity  implements NavigationView.OnNa
     private AppCompatActivity activity = dashboard.this;
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
+    // private List<addwomenclass> listUsers;
     private List<addwomenclass> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private DatabaseHelper databaseHelper;
@@ -37,6 +41,7 @@ public class dashboard extends AppCompatActivity  implements NavigationView.OnNa
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+    Databasehelper2 databasehelper2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +100,7 @@ public class dashboard extends AppCompatActivity  implements NavigationView.OnNa
         recyclerViewUsers.setItemAnimator(new DefaultItemAnimator());
         recyclerViewUsers.setHasFixedSize(true);
         recyclerViewUsers.setAdapter(usersRecyclerAdapter);
-        databaseHelper = new DatabaseHelper(activity);
+        databasehelper2 = new Databasehelper2(activity);
 
         String emailFromIntent = getIntent().getStringExtra("EMAIL");
         textViewName.setText(emailFromIntent);
@@ -106,13 +111,14 @@ public class dashboard extends AppCompatActivity  implements NavigationView.OnNa
     /**
      * This method is to fetch all user records from SQLite
      */
+    @SuppressLint("StaticFieldLeak")
     private void getDataFromSQLite() {
         // AsyncTask is used that SQLite operation not blocks the UI Thread.
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 listUsers.clear();
-                listUsers.addAll(databaseHelper.getAllWomen());
+                listUsers.addAll(databasehelper2.gettallWomen());
 
                 return null;
             }

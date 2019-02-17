@@ -1,6 +1,7 @@
 package com.nutout.login.modal;
 
-public class addwomenclass {
+
+public class addwomenclass  {
     int id;
     String fname,mname,lname,dob,age,mstatus,bloodgrp,address,state,lmp,edd,twins,pph,ppw,ppBMI,ppBMICatogey;
 
