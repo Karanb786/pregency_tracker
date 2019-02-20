@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Login</string>
+    <string name="app_name">Pregency Tracker</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_second">Card</string>
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>
     <string name="hint_email">Email</string>
@@ -17,7 +19,6 @@
     <string name="error_email_exists">Email Already Exists</string>
     <string name="error_password_match">Password Does Not Matches</string>
     <string name="error_valid_email_password">Wrong Email or Password</string>
-    <string name="action_settings">Settings</string>
     <string name="text_hello">update</string>
     <string name="text_title">Pregent women record</string>
 
@@ -81,5 +82,23 @@
         <item> Divorced </item>
 
     </string-array>
+
+    <string name="helptext1">
+
+    Hello ! Dear User , If you have any issues regarding any malfunction in this app then please send us a mail
+    at - (shivanshkancha25@gmail.com) or (bagle_karan.ghrcecs@raisoni.net) .
+</string>
+
+    <string name="helptext2">
+
+    Please refer below link for Online Pregnancy Weight Gain Calculator :
+</string>
+
+    <string name="copy">
+
+    © Copyright of Girish Private Limited
+
+</string>
+
 
 </resources>
