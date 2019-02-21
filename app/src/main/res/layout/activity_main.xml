@@ -54,9 +54,12 @@
             android:text="DOB:"
             android:inputType="date"/>
         <EditText
+            android:ems="10"
+            android:inputType="date"
             android:id="@+id/etRoll"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:focusable="false"/>
 
     </LinearLayout>
 
@@ -151,6 +154,7 @@
             android:layout_height="wrap_content"
             android:text="LMP:"/>
         <EditText
+            android:hint="Choose EDD date"
             android:inputType="number"
             android:id="@+id/lmp"
             android:layout_width="fill_parent"
@@ -167,6 +171,7 @@
             android:layout_height="wrap_content"
             android:text="EDD:"/>
         <EditText
+            android:hint="Choose LMP"
             android:inputType="number"
             android:id="@+id/edd"
             android:layout_width="fill_parent"
@@ -215,10 +220,16 @@
             android:layout_height="wrap_content"
             android:text="PPH:"/>
         <EditText
-            android:inputType="number"
+           android:hint="Enter height in m"
+            android:inputType="numberDecimal"
             android:id="@+id/pph"
-            android:layout_width="fill_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:textSize="15dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -230,10 +241,16 @@
         android:layout_height="wrap_content"
         android:text="PPW:"/>
     <EditText
-        android:inputType="number"
+        android:hint="Enter height in m"
+        android:inputType="numberDecimal"
         android:id="@+id/ppw"
-        android:layout_width="fill_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:textSize="15dp"/>
 
 </LinearLayout>
     <LinearLayout

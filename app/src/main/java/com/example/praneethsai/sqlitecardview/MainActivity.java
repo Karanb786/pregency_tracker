@@ -1,23 +1,39 @@
 package com.example.praneethsai.sqlitecardview;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.text.method.DateTimeKeyListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     EditText etName,etRoll,etAddress,etBranch,etEmail,wlmp,wedd,wpph,wppw;
@@ -30,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter1,adapter2;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+    Calendar calendar =Calendar.getInstance();
+    DatePicker picker;
+    private DatePickerDialog mDatePickerDialog,mDatePickerlmp,mDatePickerEdd;
+    private EditText edDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +69,15 @@ public class MainActivity extends AppCompatActivity {
         wpph= (EditText) findViewById(R.id.pph);
         wppw= (EditText) findViewById(R.id.ppw);
 
+
         wbmi= (TextView) findViewById(R.id.wbmi);
         wbmicat= (TextView) findViewById(R.id.wbmicat);
+        int pph =Integer.parseInt(wpph.getText().toString());
+        int ppw  = Integer.parseInt(wppw.getText().toString());
 
         radioGroup= (RadioGroup) findViewById(R.id.radio_twins);
         radioGroup.clearCheck();
+
 
 
 
@@ -69,7 +94,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setDateTimeField();
         radioactivity();
+        getlmp();
+        getEdd();
+
+        int bmi = ppw /(pph*pph);
+        wbmi.setText(bmi);
+        int bmicat;
+        if(bmi<18.5){
+            wbmicat.setText("Underweight, Recommended Weight Gain :13-18 kg");
+        }else if(bmi>18.5 && bmi<24.9){
+            wbmicat.setText("Normal, Recommended Weight Gain :11-16 kg");
+        }else if(bmi>25 && bmi<29.9){
+            wbmicat.setText("Overweight, Recommended Weight Gain :7-11 kg");
+        }else if(bmi>30){
+            wbmicat.setText("Obese, Recommended Weight Gain :5-6 kg");
+        }
+
+            etRoll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDatePickerDialog.show();
+                }
+            });
+            wlmp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        mDatePickerlmp.show();
+                }
+            });
+
+            wedd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDatePickerEdd.show();
+
+                }
+            });
+
+
+
+
+
+
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
                 String twins =radioButton.getText().toString();
                 String pph = wpph.getText().toString();
                 String ppw = wppw.getText().toString();
+
+
 
 
 
@@ -119,17 +189,89 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+
+
+    private void getlmp() {
+        mDatePickerlmp = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            newDate.add(Calendar.DAY_OF_MONTH,-280);
+            SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+            final Date startDate = newDate.getTime();
+            String fdate = sd.format(startDate);
+            wlmp.setText(fdate);
+
+        }
+    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        mDatePickerlmp.getDatePicker();
+
+    }
+   private void getEdd(){
+       mDatePickerEdd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+           public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+               Calendar newDate = Calendar.getInstance();
+               newDate.set(year, monthOfYear, dayOfMonth);
+               newDate.add(Calendar.DAY_OF_MONTH,280);
+               SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+               final Date startDate = newDate.getTime();
+               String fdate = sd.format(startDate);
+               wedd.setText(fdate);
+
+           }
+       }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+       mDatePickerEdd.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+
+   }
+
+
+    private void setDateTimeField() {
+
+        Calendar calendar = Calendar.getInstance();
+        mDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                Calendar yeardate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = newDate.getTime();
+                String fdate = sd.format(startDate);
+                etRoll.setText(fdate);
+
+
+
+                Calendar localdate = Calendar.getInstance(TimeZone.getDefault());
+
+                int cyear = localdate.get(Calendar.YEAR);
+                int age = (int) (cyear- year);
+                etAddress.setText(String.valueOf(age));
+
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+    }
+
 
     private void radioactivity() {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                radioButton= (RadioButton) radioGroup.findViewById(i);
+                radioButton = (RadioButton) radioGroup.findViewById(i);
 
             }
         });
+
     }
+
+
+
 
 
   /*  private void spinneractivity() {
@@ -173,5 +315,10 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
 
-}
+
+
+
+    }
+
+
 

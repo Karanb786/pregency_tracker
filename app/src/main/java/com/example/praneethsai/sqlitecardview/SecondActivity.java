@@ -3,6 +3,7 @@ package com.example.praneethsai.sqlitecardview;
 /**
  * Created by praneethsai on 05-07-2016.
  */
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,10 +15,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -34,6 +37,8 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+
+
 
     TextView textViewName;
 
@@ -139,6 +144,10 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
 
 }
 

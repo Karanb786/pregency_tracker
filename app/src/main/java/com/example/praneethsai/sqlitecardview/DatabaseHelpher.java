@@ -114,4 +114,28 @@ public class DatabaseHelpher extends SQLiteOpenHelper {
         db.close();
     }
 
+    public List<DatabaseModel> search(String keyword) {
+        List<DatabaseModel> contacts = null;
+        try {
+            SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+            Cursor cursor = sqLiteDatabase.rawQuery("select * from " + STUDENT_TABLE + " where " + "name" + " like ?", new String[] { "%" + keyword + "%" });
+            if (cursor.moveToFirst()) {
+                contacts = new ArrayList<DatabaseModel>();
+                do {
+                    DatabaseModel contact = new DatabaseModel();
+                    contact.setname(cursor.getString(0));
+                    contact.setdob(cursor.getString(1));
+                    contact.setage(cursor.getString(2));
+                    contact.setmob(cursor.getString(3));
+                    contact.setadress(cursor.getString(4));
+                    contact.setlmp(cursor.getString(5));
+                    contacts.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            contacts = null;
+        }
+        return contacts;
+    }
+
 }

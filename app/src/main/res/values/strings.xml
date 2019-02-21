@@ -21,6 +21,7 @@
     <string name="error_valid_email_password">Wrong Email or Password</string>
     <string name="text_hello">update</string>
     <string name="text_title">Pregent women record</string>
+    <string name="keyword">Keyword</string>
 
     <string-array name="state_names">
 
